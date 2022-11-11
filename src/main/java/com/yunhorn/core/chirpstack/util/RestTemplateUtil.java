@@ -36,6 +36,10 @@ public class RestTemplateUtil {
         }
         HttpEntity<?> entity = new HttpEntity<>(body, httpHeaders);
         restTemplate.setErrorHandler(new ResponseErrorHandler() {
+            /*
+            Some exceptions cannot be caught, such as request timeout.
+            The exceptions that can be caught, such as token expiration, password error (the ResponseEntity object can be returned below the former, and the latter can throw an exception directly)
+             */
             @Override
             public boolean hasError(ClientHttpResponse response) {
                 return false;
